@@ -7,10 +7,10 @@ const MongoClient = mongodb.MongoClient;
 
 const port = process.env.PORT || 8000;
 
-MongoClient.connect(process.env.RESTREVIEWS_DB_URL, {
-  maxPoolSize: 50,
+MongoClient.connect(process.env.RESTREVIEWS_DB_URI, {
+  poolSize: 50,
   wtimeout: 2500,
-  useNewUrlParser: true,
+  useNewUrlParse: true,
 })
   .catch(err => {
     console.error(err.stack);
@@ -19,6 +19,6 @@ MongoClient.connect(process.env.RESTREVIEWS_DB_URL, {
   .then(async client => {
     await RestaurantsDAO.injectDB(client);
     app.listen(port, () => {
-      console.log(`Listening on port ${port}`);
+      console.log(`listening on port ${port}`);
     });
   });
